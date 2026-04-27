@@ -20,7 +20,7 @@ navLinks.forEach(link => {
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
+   /* e.preventDefault(); */
 
     // Get form data
     const name = document.getElementById('name').value;
