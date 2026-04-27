@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT-Infrastruktur Lösungen | Professionelle IT-Services</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="brand-icon" style="display: flex; align-items: center;">
+                    <img src="bilder/logo/Transparent%20Logo%20Mica.png" alt="MDK-IT Logo"
+                        style="height: 45px; width: auto;">
+                </span>
+                <span>MDK-IT</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#dienste">Dienste</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>IT-Infrastruktur für morgen</h1>
+                <p>Modernisieren Sie Ihre IT-Infrastruktur mit unserer umfassenden Expertise in Cloud, On-Premise und
+                    hybriden Umgebungen</p>
+                <a href="#contact" class="btn btn-primary">Jetzt Beratung buchen</a>
+            </div>
+            <div class="hero-image">
+                <img src="bilder/blue-cable.jpg" alt="Server">
+            </div>
+        </div>
+    </section>
+
+    <!-- Dienste Section -->
+    <section id="dienste" class="dienste">
+        <div class="container">
+            <div class="section-header">
+                <h2>Unsere Dienste</h2>
+                <p>Alles für Ihre IT-Infrastruktur</p>
+            </div>
+        </div>
+
+        <div class="services-list">
+            <!-- Section 1: IT-Infrastruktur (Image Left, Text Right) -->
+            <div class="service-row">
+                <div class="service-image">
+                    <img src="bilder/px-402-6466141.jpg" alt="IT-Infrastruktur">
+                </div>
+                <div class="service-text">
+                    <h3>IT-Infrastruktur</h3>
+                    <p>Professioneller Aufbau und gezielte Weiterentwicklung Ihrer IT-Infrastruktur – individuell
+                        abgestimmt auf Ihre Anforderungen. Wir übernehmen die Migration, Implementierung und Verwaltung
+                        von Cloud-, hybriden und On-Premise-Lösungen und sorgen für maximale Skalierbarkeit, Sicherheit
+                        und Zukunftsfähigkeit.</p>
+                </div>
+            </div>
+
+            <!-- Section 2: Datensicherung & Recovery (Image Right, Text Left) -->
+            <div class="service-row reverse">
+                <div class="service-image">
+                    <img src="bilder/7TuVH.jpg" alt="Datensicherung & Recovery">
+                </div>
+                <div class="service-text">
+                    <h3>Datensicherung & Recovery</h3>
+                    <p>Ihre Daten sind das Herz Ihres Unternehmens – wir sorgen für deren Sicherheit. Durch intelligente
+                        Backup-Lösungen und klar strukturierte Recovery-Konzepte gewährleisten wir eine schnelle
+                        Wiederherstellung und minimieren Ausfallzeiten auf ein Minimum.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Section 3: IT Support (Image Left, Text Right) -->
+            <div class="service-row">
+                <div class="service-image">
+                    <img src="bilder/ymNeZ.jpg" alt="IT Support & Wartung">
+                </div>
+                <div class="service-text">
+                    <h3>IT Support & Wartung</h3>
+                    <p>Ein zuverlässiger IT-Betrieb erfordert kontinuierliche Betreuung – genau dafür sind wir da. Mit
+                        proaktivem Monitoring, regelmäßiger Wartung und schnellen Reaktionszeiten erkennen wir Probleme
+                        frühzeitig und beheben Störungen effizient. So stellen wir sicher, dass Ihre IT jederzeit
+                        stabil, sicher und leistungsfähig bleibt – damit Sie sich auf Ihr Kerngeschäft konzentrieren
+                        können.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header white">
+                <h2><a href="#contactForm" style="color: inherit; text-decoration: none;">Buchen Sie Ihr kostenloses
+                        Erstgespräch</a></h2>
+                <p>Lassen Sie uns Ihre IT-Herausforderungen besprechen</p>
+            </div>
+
+            <div class="contact-wrapper">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-Mail *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="company">Unternehmen</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefon</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="message">Nachricht *</label>
+                        <textarea id="message" name="message" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Nachricht senden</button>
+                </form>
+
+                <div class="contact-info">
+                    <div class="info-block">
+                        <h3>Adresse</h3>
+                        <p>Asperger Straße 30<br>71638 Ludwigsburg<br>Deutschland</p>
+                    </div>
+                    <div class="info-block">
+                        <h3>Kontakt</h3>
+                        <p>Telefon: +49 (0) 177 699 2314<br>E-Mail: michaeldkelava@gmail.com</p>
+                    </div>
+                    <div class="info-block">
+                        <h3>Verfügbarkeit</h3>
+                        <p>Montag - Freitag: 08:00 - 18:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 MDK-IT. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
