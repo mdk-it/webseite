@@ -5,12 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MDK-IT | Professionelle IT-Services</title>
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- Preload kritische Ressourcen , dass die seite beim aufrufen im Voraus schnell geladen wird-->
+    
+    <!-- Preload kritische Ressourcen -->
     <link rel="preload" href="styles.css" as="style">
-    <link rel="preload" href="bilder/logo/Transparent%20Logo%20Mica.png" as="image">
     <link rel="preload" href="bilder/blue-cable.jpg" as="image">
+    <link rel="preload" href="bilder/logo/Transparent%20Logo%20Mica.png" as="image">
     
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -50,7 +49,7 @@
                 <a href="#contact" class="btn btn-primary">Jetzt Beratung buchen</a>
             </div>
             <div class="hero-image">
-                <img src="bilder/blue-cable.jpg" alt="Server">
+                <img src="bilder/blue-cable.jpg" alt="Server" width="600" height="400" fetchpriority="high" decoding="async">
             </div>
         </div>
     </section>
@@ -68,7 +67,7 @@
             <!-- Section 1: IT-Infrastruktur (Image Left, Text Right) -->
             <div class="service-row">
                 <div class="service-image">
-                    <img src="bilder/px-402-6466141.jpg" alt="IT-Infrastruktur">
+                    <img src="bilder/px-402-6466141.jpg" alt="IT-Infrastruktur" width="690" height="460" decoding="async">
                 </div>
                 <div class="service-text">
                     <h3>IT-Infrastruktur</h3>
@@ -82,7 +81,7 @@
             <!-- Section 2: Datensicherung & Recovery (Image Right, Text Left) -->
             <div class="service-row reverse">
                 <div class="service-image">
-                    <img src="bilder/7TuVH.jpg" alt="Datensicherung & Recovery">
+                    <img src="bilder/7TuVH.jpg" alt="Datensicherung & Recovery" width="624" height="416" decoding="async">
                 </div>
                 <div class="service-text">
                     <h3>Datensicherung & Recovery</h3>
@@ -96,7 +95,7 @@
             <!-- Section 3: IT Support (Image Left, Text Right) -->
             <div class="service-row">
                 <div class="service-image">
-                    <img src="bilder/ymNeZ.jpg" alt="IT Support & Wartung">
+                    <img src="bilder/ymNeZ.jpg" alt="IT Support & Wartung" width="680" height="376" decoding="async">
                 </div>
                 <div class="service-text">
                     <h3>IT Support & Wartung</h3>
@@ -120,8 +119,7 @@
             </div>
 
             <div class="contact-wrapper">
-                <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-                    <input type="hidden" name="access_key" value="1fddb19d-e867-4893-9ecc-66d486ad50fe">
+                <form class="contact-form" id="contactForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Name *</label>
@@ -173,8 +171,8 @@
             <p>&copy; 2026 MDK-IT. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
-
-    <script src="script.js"></script>
+        <!-- JavaScript-Dateien am Ende des Body-Tags für bessere Ladezeiten -->
+    <script src="script.js" defer></script>
 </body>
 
 </html>
