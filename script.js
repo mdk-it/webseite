@@ -17,6 +17,53 @@ navLinks.forEach(link => {
 });
 
 // ============================================
+// Adaptive Qualität - Reduziert Qualität bei wenig RAM
+// ============================================
+
+class AdaptiveQuality {
+    constructor() {
+        this.deviceTier = this.detectDeviceTier();
+        this.init();
+    }
+
+    detectDeviceTier() {
+        const memory = navigator.deviceMemory || 4;
+        const cores = navigator.hardwareConcurrency || 4;
+        const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        const connection = navigator.connection || {};
+        const effectiveType = connection.effectiveType;
+        
+        if (isMobile && memory < 4) return 'low';
+        if (isMobile) return 'medium';
+        if (memory >= 8 && cores >= 4 && effectiveType === '4g') return 'high';
+        if (memory >= 4) return 'medium';
+        return 'low';
+    }
+
+    init() {
+        console.log(`[Adaptive] Gerätetier: ${this.deviceTier} (RAM: ${navigator.deviceMemory || 'unbekannt'}GB)`);
+        this.applyQualityToImages();
+    }
+
+    applyQualityToImages() {
+        const images = document.querySelectorAll('img');
+        
+        images.forEach(img => {
+            if (img.dataset.adaptive === 'true') return;
+            img.dataset.adaptive = 'true';
+            
+            // Bei niedrigem Tier: Async Decoding für schnelleres Laden
+            if (this.deviceTier === 'low') {
+                img.decoding = 'async';
+                img.loading = 'lazy';
+            } else if (this.deviceTier === 'medium') {
+                img.decoding = 'async';
+            }
+        });
+    }
+}
+
+// ============================================
 // Multi-Thread Bildverarbeitung mit Web Workers
 // ============================================
 
@@ -98,6 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
         processor = new ParallelProcessor();
         console.log('[Parallel] Multi-Thread Verarbeitung aktiv');
     }
+    // Adaptive Qualität initialisieren
+    new AdaptiveQuality();
 });
 
 // Bilder parallel vorladen
