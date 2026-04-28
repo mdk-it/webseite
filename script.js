@@ -66,7 +66,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add scroll animation effect to dienste cards
+// Add scroll animation effect to dienste cards, desto größer die erste zahl der rootMargin desto schneller laden die Bilder
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
