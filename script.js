@@ -220,9 +220,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Add scroll animation effect to dienste cards , desto größer die erste zahl der rootMargin desto schneller laden die Bilder
+// wenn treshold negativ ist, werden die Bilder früher geladen, wenn sie in den Viewport kommen
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '200px 0px 0px 0px'
+    threshold: 0.0,
+    rootMargin: '400px 0px 0px 0px'
 };
 
 const observer = new IntersectionObserver(function(entries) {
