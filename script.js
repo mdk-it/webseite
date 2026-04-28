@@ -183,12 +183,13 @@ function preloadImagesParallel() {
 
 const contactForm = document.getElementById('contactForm');
 
-contactForm.addEventListener('submit', function(e) {
+contactForm.addEventListener('submit', async function(e) {
     e.preventDefault();
 
     // Get form data
     const name = document.getElementById('name').value;
     const email = document.getElementById('email').value;
+    const company = document.getElementById('company').value;
     const phone = document.getElementById('phone').value;
     const message = document.getElementById('message').value;
 
@@ -198,12 +199,43 @@ contactForm.addEventListener('submit', function(e) {
         return;
     }
 
-    // In a real application, you would send this data to a server
-    // For now, we'll just show a success message
-    alert(`Vielen Dank, ${name}! Wir werden uns bald bei Ihnen melden.`);
+    // Submit to FormSubmit.io service
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('company', company);
+    formData.append('phone', phone);
+    formData.append('message', message);
+    formData.append('_captcha', 'false');
+    formData.append('_next', window.location.href);
 
-    // Reset form
-    contactForm.reset();
+    try {
+        const response = await fetch('https://formsubmit.co/info@mdk-it.com', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            // Show success message with smooth animation
+            const successMessage = document.getElementById('successMessage');
+            
+            // Trigger animation
+            successMessage.classList.add('show');
+
+            // Reset form
+            contactForm.reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
+        } else {
+            alert('Es gab einen Fehler beim Versenden. Bitte versuchen Sie es später erneut.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Es gab einen Fehler beim Versenden. Bitte versuchen Sie es später erneut.');
+    }
 });
 
 // Smooth scrolling for anchor links
