@@ -2,7 +2,9 @@
 const hamburger = document.getElementById('hamburger');
 const navMenu = document.getElementById('navMenu');
 
-hamburger.addEventListener('click', () => {
+// Toggle menu on hamburger click
+hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
     navMenu.classList.toggle('active');
     hamburger.classList.toggle('active');
 });
@@ -14,6 +16,15 @@ navLinks.forEach(link => {
         navMenu.classList.remove('active');
         hamburger.classList.remove('active');
     });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar.contains(e.target) && navMenu.classList.contains('active')) {
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
+    }
 });
 
 // ============================================
