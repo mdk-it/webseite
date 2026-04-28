@@ -16,11 +16,115 @@ navLinks.forEach(link => {
     });
 });
 
+// ============================================
+// Multi-Thread Bildverarbeitung mit Web Workers
+// ============================================
+
+class ParallelProcessor {
+    constructor() {
+        this.workers = [];
+        this.maxWorkers = navigator.hardwareConcurrency || 4;
+        this.initWorkers();
+    }
+
+    initWorkers() {
+        for (let i = 0; i < this.maxWorkers; i++) {
+            try {
+                const worker = new Worker('image-worker.js');
+                this.workers.push({ worker, busy: false });
+            } catch (e) {
+                console.warn('Worker nicht verfügbar:', e);
+            }
+        }
+        console.log(`[Parallel] ${this.workers.length} Worker-Threads aktiv`);
+    }
+
+    processImage(imageElement, options = {}) {
+        return new Promise((resolve, reject) => {
+            const freeWorker = this.workers.find(w => !w.busy);
+            
+            if (!freeWorker) {
+                this.processSync(imageElement, options).then(resolve).catch(reject);
+                return;
+            }
+
+            freeWorker.busy = true;
+            
+            const worker = freeWorker.worker;
+            const handler = (e) => {
+                if (e.data.type === 'result') {
+                    worker.removeEventListener('message', handler);
+                    freeWorker.busy = false;
+                    resolve(e.data.data);
+                }
+            };
+
+            worker.addEventListener('message', handler);
+            worker.addEventListener('error', (e) => {
+                freeWorker.busy = false;
+                reject(e);
+            });
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = imageElement.naturalWidth || imageElement.width;
+            canvas.height = imageElement.naturalHeight || imageElement.height;
+            ctx.drawImage(imageElement, 0, 0);
+            
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            
+            worker.postMessage({
+                type: options.type || 'optimize',
+                imageData: imageData.data,
+                width: canvas.width,
+                height: canvas.height
+            });
+        });
+    }
+
+    processSync(imageElement, options) {
+        return new Promise((resolve) => {
+            imageElement.decoding = 'async';
+            resolve(true);
+        });
+    }
+}
+
+// Parallele Bildverarbeitung initialisieren
+let processor = null;
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.Worker) {
+        processor = new ParallelProcessor();
+        console.log('[Parallel] Multi-Thread Verarbeitung aktiv');
+    }
+});
+
+// Bilder parallel vorladen
+function preloadImagesParallel() {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    const imageSources = Array.from(images).map(img => img.src);
+    
+    const loadPromises = imageSources.map(src => {
+        return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(src);
+            img.onerror = () => resolve(src);
+            img.src = src;
+        });
+    });
+    
+    return Promise.all(loadPromises);
+}
+
+// ============================================
 // Form Handling
+// ============================================
+
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', function(e) {
-   /* e.preventDefault(); */
+    e.preventDefault();
 
     // Get form data
     const name = document.getElementById('name').value;
@@ -66,10 +170,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add scroll animation effect to dienste cards, desto größer die erste zahl der rootMargin desto schneller laden die Bilder
+// Add scroll animation effect to dienste cards , desto größer die erste zahl der rootMargin desto schneller laden die Bilder
 const observerOptions = {
     threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
+    rootMargin: '200px 0px 0px 0px'
 };
 
 const observer = new IntersectionObserver(function(entries) {
@@ -81,12 +185,12 @@ const observer = new IntersectionObserver(function(entries) {
     });
 }, observerOptions);
 
-// Observe service rows and steps
+// Observe service rows and steps transition kürzer machen
 const cards = document.querySelectorAll('.service-row, .step');
 cards.forEach(card => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
     observer.observe(card);
 });
 // Close mobile menu when clicking outside
