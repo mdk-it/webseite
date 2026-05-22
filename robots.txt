@@ -1,0 +1,12 @@
+# Robots.txt für MDK-IT
+# Erlaubt allen Suchmaschinen das Indexieren aller Seiten, außer den rechtlichen Angaben
+
+User-agent: *
+Allow: /
+
+# Rechtliche Seiten von der Indexierung ausschließen, um Relevanz-Fokus auf den Dienstleistungen zu halten
+Disallow: /impressum.html
+Disallow: /datenschutz.html
+
+# Sitemap-Position für Google & Bing
+Sitemap: https://www.mdk-it.com/sitemap.xml
